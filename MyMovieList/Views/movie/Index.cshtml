@@ -1,0 +1,87 @@
+﻿@model IEnumerable<movie>
+
+@{
+    ViewData["Title"] = "List of Movies";
+}
+
+
+<style>
+    
+
+    img{
+        margin-top:10px;
+    }
+
+    .title {
+        position: relative;
+        left: 120px;
+        bottom: 100px;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .rs{
+        position:relative;
+        top:90px ;
+        left:50%
+    }
+    
+    
+
+    }
+
+    
+</style>
+
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <a action=""
+        <div style="position:relative">
+            <div>@Html.ActionLink("all movies","Index","movie",new{p=0})</div>
+            <div>@Html.ActionLink("alphabetical","Index","movie",new{p=1})</div>
+        </div>
+        <hr >
+        
+        <table class="table" style="width: 60% ; position:relative; left:200px " >
+            <thead>
+                <tr class="text-center" >
+                    <th  >Rank</th>
+                    <th>Movie </th>
+
+                    <th>Score</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                    @foreach (var item in Model.Select((value, i) => new { i, value }))
+                {
+                        <tr >
+                        <td  width="50px">
+                            <div class="rs">@(item.i+1)</div>
+                        </td>
+                        <td class="align-middle" width="150px">
+                            <div style="position:relative; left:50px">
+                                <img class="rounded-circle" src="@item.value.PosterUrl" alt="@item.value.movieName" style="max-width: 100px" />
+                                <div class="title" style="max-width: 20px">
+                            
+                                @Html.DisplayFor(modelItem => item.value.movieName)
+                                </div>
+                            </div>
+                            
+                        </td>
+                        
+                        
+                            <td  width="50px">
+                                   <div class="rs"  > @Html.DisplayFor(modelItem => item.value.movieScore)</div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
